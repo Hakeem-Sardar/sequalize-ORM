@@ -8,7 +8,7 @@ const userRoutes = express.Router()
   const {
       signup,
       login,
-      profileGet
+      profileGet,
 
   }= new userController();
 
