@@ -1,3 +1,4 @@
+// const complaint = require("../models/complaintsModel");
 const Complaint = require("../models/complaintsModel");
 const User = require("../models/User")
 const baseController = require("../utils/baseController");
@@ -53,7 +54,56 @@ class complaientController extends baseController {
       })
     }
   }
+  //  getting all complaints 
 
+  GetAll = async (req,res)=>{
+    try {
+      const result = await Complaint.findAll();
+      console.log(result[1])
+      return res.status(200).json({
+        message:"getting all Complaints",
+        result
+      })
+    } catch (error) {
+      console.log(error.message,error)
+      return res.status(400).json({
+        message:"unable to get all Complaints"
+      })
+      
+    }
+  }
+
+  // update Complaint method 
+
+  updateCom = async (req, res) => {
+    try {
+      const {title,description,attachment,UserId}= req.body
+      const result = await Complaint.update(
+        {
+          title,
+          description,
+          attachment,
+          UserId
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+
+        return res.status(200).json({
+          message:"profile updated successfully",
+          result
+        })
+
+    } catch (error) {
+      console.log(error.message, error);
+      return res.status(400).json({
+        message: "unable to update try again",
+      });
+    }
+  };
 
 
 

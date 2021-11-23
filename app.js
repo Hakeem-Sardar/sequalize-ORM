@@ -2,9 +2,10 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const db = require("./src/dbConfig/config");
 require("dotenv").config();
-const routess = require("./src/routes/userRoutes");
-const route = require("./src/routes/profileRoutes")
-const routee = require("./src/routes/compliantsRoutes")
+// const routess = require("./src/routes/userRoutes");
+// const route = require("./src/routes/profileRoutes")
+// const routee = require("./src/routes/compliantsRoutes")
+const router = require("./src/utils/route")
 // const sync = require("./src/utils/tableSync")
 
 const app = express();
@@ -20,9 +21,7 @@ db.authenticate()
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(routess);
-app.use(route);
-app.use(routee)
+app.use("/v1",router)
 
 const port = process.env.port || 5000;
 
